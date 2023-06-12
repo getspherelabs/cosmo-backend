@@ -20,6 +20,7 @@ application {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -32,8 +33,14 @@ dependencies {
     implementation(Libs.Exposed.core)
     implementation(Libs.Exposed.dao)
     implementation(Libs.Exposed.jdbc)
+    implementation(Libs.Exposed.jodatime)
 
     implementation(Libs.Postgresql.core)
+
+    implementation(Libs.Hikari.core)
+
+    implementation(Libs.Koin.ktor)
+
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
