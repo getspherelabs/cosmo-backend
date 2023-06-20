@@ -2,7 +2,7 @@ object Version {
     const val exposed = "0.40.1"
     const val postgresql = "42.5.4"
     const val hikari = "2.3.13"
-    const val koin = "2.0.1"
+    const val koin = "3.3.1"
 }
 
 object Libs {
@@ -22,6 +22,6 @@ object Libs {
     }
 
     object Koin {
-        const val ktor = "org.koin:koin-ktor:${Version.koin}"
+        const val ktor = "io.insert-koin:koin-ktor:${Version.koin}"
     }
 }

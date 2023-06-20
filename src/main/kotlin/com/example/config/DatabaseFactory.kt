@@ -25,7 +25,6 @@ object DatabaseFactory {
             validate()
         }
 
-
         return HikariDataSource(hikariConfig)
     }
 
