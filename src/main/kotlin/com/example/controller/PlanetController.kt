@@ -9,17 +9,18 @@ interface PlanetController {
     suspend fun removeById(id: String): Boolean
 }
 
-class DefaultPlanetController: PlanetController {
-
+class DefaultPlanetController(
+    private val dao: PlanetDao
+) : PlanetController {
     override suspend fun insert(name: String, description: String, size: String, distanceFromSun: String): String {
-        TODO("Not yet implemented")
+        return dao.insert(name, description, size, distanceFromSun)
     }
 
     override suspend fun getPlanets(): List<Planet> {
-        TODO("Not yet implemented")
+        return dao.getPlanets()
     }
 
     override suspend fun removeById(id: String): Boolean {
-        TODO("Not yet implemented")
+        return dao.removeById(id)
     }
 }
