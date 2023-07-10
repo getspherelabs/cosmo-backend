@@ -3,12 +3,12 @@ package com.example.dao
 import com.example.common.dbQuery
 import com.example.entity.PlanetEntity
 import com.example.entity.asPlanet
-import com.example.model.Planet
+import com.example.model.PlanetDomain
 import java.util.*
 
 interface PlanetDao {
     suspend fun insert(name: String, description: String, size: String, distanceFromSun: String): String
-    suspend fun getPlanets(): List<Planet>
+    suspend fun getPlanets(): List<PlanetDomain>
     suspend fun removeById(id: String): Boolean
 }
 
@@ -22,7 +22,7 @@ class DefaultPlanetDao : PlanetDao {
         }.id.value.toString()
     }
 
-    override suspend fun getPlanets(): List<Planet> = dbQuery {
+    override suspend fun getPlanets(): List<PlanetDomain> = dbQuery {
         PlanetEntity.all().sortedBy { it.id }.map { it.asPlanet() }
     }
 
