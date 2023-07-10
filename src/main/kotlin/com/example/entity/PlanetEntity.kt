@@ -1,6 +1,6 @@
 package com.example.entity
 
-import com.example.model.Planet
+import com.example.model.PlanetDomain
 import com.example.table.PlanetTable
 import org.jetbrains.exposed.dao.UUIDEntity
 import org.jetbrains.exposed.dao.UUIDEntityClass
@@ -17,8 +17,8 @@ class PlanetEntity(id: EntityID<UUID>) : UUIDEntity(id) {
     var createdTimestamp by PlanetTable.createdTimestamp
 }
 
-fun PlanetEntity.asPlanet(): Planet {
-    return Planet(
+fun PlanetEntity.asPlanet(): PlanetDomain {
+    return PlanetDomain(
         this.id.value.toString(),
         this.name,
         this.description,
