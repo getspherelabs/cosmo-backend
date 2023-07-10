@@ -3,12 +3,12 @@ package com.example.dao
 import com.example.common.dbQuery
 import com.example.entity.StarEntity
 import com.example.entity.asStar
-import com.example.model.Star
+import com.example.model.StarDomain
 import java.util.*
 
 interface StarDao {
     suspend fun insert(name: String, description: String, distanceFromSun: String, size: String): String
-    suspend fun getStars(): List<Star>
+    suspend fun getStars(): List<StarDomain>
     suspend fun removeById(id: String): Boolean
 }
 
@@ -24,7 +24,7 @@ class DefaultStarDao : StarDao {
         }
     }
 
-    override suspend fun getStars(): List<Star> {
+    override suspend fun getStars(): List<StarDomain> {
         return dbQuery {
             StarEntity.all().map { it.asStar() }
         }

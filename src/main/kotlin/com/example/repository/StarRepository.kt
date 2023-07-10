@@ -1,17 +1,17 @@
-package com.example.controller
+package com.example.repository
 
 import com.example.dao.StarDao
 import com.example.model.StarDomain
 
-interface StarController {
+interface  StarRepository {
     suspend fun insert(name: String, description: String, distanceFromSun: String, size: String): String
     suspend fun getStars(): List<StarDomain>
     suspend fun removeById(id: String): Boolean
 }
 
-class DefaultStartController(
+class DefaultStarRepository (
     private val dao: StarDao
-): StarController {
+): StarRepository {
     override suspend fun insert(name: String, description: String, distanceFromSun: String, size: String): String {
         return dao.insert(name, description, distanceFromSun, size)
     }

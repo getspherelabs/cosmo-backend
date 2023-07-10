@@ -1,1 +1,4 @@
-rootProject.name = "com.example.milkyway-backend"
+rootProject.name = "com.example.cosmo-backend"
+include("data")
+include("domain")
+include("data")

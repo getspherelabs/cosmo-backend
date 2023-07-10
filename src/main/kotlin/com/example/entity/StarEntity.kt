@@ -1,6 +1,6 @@
 package com.example.entity
 
-import com.example.model.Star
+import com.example.model.StarDomain
 import com.example.table.StarTable
 import org.jetbrains.exposed.dao.UUIDEntity
 import org.jetbrains.exposed.dao.UUIDEntityClass
@@ -18,9 +18,8 @@ class StarEntity(id: EntityID<UUID>) : UUIDEntity(id) {
     companion object : UUIDEntityClass<StarEntity>(StarTable)
 }
 
-
-fun StarEntity.asStar(): Star {
-    return Star(
+fun StarEntity.asStar(): StarDomain {
+    return StarDomain(
         id = this.id.value.toString(),
         name = this.name,
         description = this.description,

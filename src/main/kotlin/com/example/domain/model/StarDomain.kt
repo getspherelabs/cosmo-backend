@@ -1,6 +1,6 @@
-package com.example.model
+package com.example.domain.model
 
-data class Star(
+data class StarDomain(
     val id: String,
     val name: String,
     val description: String,
