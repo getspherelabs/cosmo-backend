@@ -1,6 +1,6 @@
 package com.example.model
 
-data class Planet(
+data class PlanetDomain(
     val id: String,
     val name: String,
     val description: String,
