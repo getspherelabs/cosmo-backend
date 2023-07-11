@@ -1,6 +1,5 @@
 package com.example.data.entity
 
-import com.example.data.table.ArticleTable
 import com.example.data.table.PlanetTable
 import org.jetbrains.exposed.dao.UUIDEntity
 import org.jetbrains.exposed.dao.UUIDEntityClass
