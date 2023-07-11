@@ -24,24 +24,28 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
-    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
 
+    implementation(Libs.Ktor.negotiation)
+    implementation(Libs.Ktor.core)
+    implementation(Libs.Ktor.json)
+    implementation(Libs.Ktor.netty)
     implementation(Libs.Exposed.core)
     implementation(Libs.Exposed.dao)
     implementation(Libs.Exposed.jdbc)
     implementation(Libs.Exposed.jodatime)
-
-
     implementation(Libs.Postgresql.core)
-
     implementation(Libs.Hikari.core)
-
+    implementation(Libs.H2.h2)
     implementation(Libs.Koin.ktor)
+    implementation(Libs.Koin.core)
+    implementation(Libs.Faker.kotlin)
 
-    testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
+    testImplementation(Libs.Koin.test)
+    testImplementation(Libs.Hikari.core)
+    testImplementation(Libs.Ktor.test)
+    testImplementation(Libs.H2.h2)
+    testImplementation(Libs.Coroutine.test)
+
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
