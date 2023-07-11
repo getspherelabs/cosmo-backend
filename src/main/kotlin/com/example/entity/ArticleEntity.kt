@@ -1,6 +1,6 @@
 package com.example.entity
 
-import com.example.table.ArticleTable
+import com.example.data.table.ArticleTable
 import org.jetbrains.exposed.dao.UUIDEntity
 import org.jetbrains.exposed.dao.UUIDEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
