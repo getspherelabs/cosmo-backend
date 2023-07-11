@@ -1,5 +1,6 @@
 package com.example.table
 
+import com.example.data.table.PlanetTable.default
 import org.jetbrains.exposed.dao.id.UUIDTable
 import org.jetbrains.exposed.sql.jodatime.datetime
 import org.joda.time.DateTime
@@ -10,4 +11,5 @@ object StarTable : UUIDTable() {
     var distanceFromSun = text(name = "distance_from_sun")
     var description = text(name = "description")
     var createdTimestamp = datetime("created_timestamp").default(DateTime.now())
+    var updatedTimestamp = datetime(name = "updated_timestamp").default(DateTime.now())
 }
