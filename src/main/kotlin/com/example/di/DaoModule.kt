@@ -15,4 +15,5 @@ val daoModule = module {
 
 val testModule = module {
     single<ArticleDao> { DefaultArticleDao() }
+    single<com.example.data.dao.PlanetDao> { com.example.data.dao.DefaultPlanetDao() }
 }
