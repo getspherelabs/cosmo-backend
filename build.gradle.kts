@@ -29,6 +29,7 @@ dependencies {
     implementation(Libs.Ktor.negotiation)
     implementation(Libs.Ktor.core)
     implementation(Libs.Ktor.json)
+    implementation(Libs.Ktor.cors)
     implementation(Libs.Ktor.netty)
     implementation(Libs.Exposed.core)
     implementation(Libs.Exposed.dao)
