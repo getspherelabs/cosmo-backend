@@ -9,8 +9,10 @@ import com.example.http.response.PlanetsResponse
 import com.example.utils.*
 import io.github.serpro69.kfaker.faker
 import org.junit.Test
+import java.util.UUID
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 
 class PlanetRouteTest : CosmoTest() {
 
@@ -32,7 +34,7 @@ class PlanetRouteTest : CosmoTest() {
             distanceFromSun = distanceFromSun
         ).toJson()
 
-        post("api/v1/planet/new", request).content.toDto<PlanetIdResponse>().let { newResponse ->
+        post("$v1/planet/new", request).content.toDto<PlanetIdResponse>().let { newResponse ->
             assertEquals(newResponse.status, Status.Success)
             assertNotNull(newResponse.id)
         }
@@ -54,11 +56,55 @@ class PlanetRouteTest : CosmoTest() {
             distanceFromSun = distanceFromSun
         ).toJson()
 
-        post("api/v1/planet/new", request)
+        post("$v1/planet/new", request)
 
-        get("/api/v1/planets").content.toDto<PlanetsResponse>().let { newResponse ->
+        get("$v1/planets").content.toDto<PlanetsResponse>().let { newResponse ->
             assertEquals(newResponse.status, Status.Success)
             assertEquals(newResponse.planets.first().name, planetName)
         }
+    }
+
+    @Test
+    fun `when user insert planet and check getting planet by id`() = withApp {
+        val planetName = faker.space.planet()
+        val desc = faker.rickAndMorty.quotes()
+        val isPopular = false
+        val size = "100"
+        val distanceFromSun = "1001km"
+
+        val request = PlanetRequest(
+            name = planetName,
+            description = desc,
+            isPopular = isPopular,
+            size = size,
+            distanceFromSun = distanceFromSun
+        ).toJson()
+
+        val newRequest = post("api/v1/planet/new", request).content.toDto<PlanetIdResponse>()
+
+        get("$v1/planet/${newRequest.id}").content.toDto<PlanetResponse>().let { newResponse ->
+            assertEquals(newResponse.status, Status.Success)
+            assertEquals(newResponse.planet?.name, planetName)
+        }
+    }
+
+    @Test
+    fun `when user insert planet and check getting planet by id when it is not found`() = withApp {
+        val planetName = faker.space.planet()
+        val desc = faker.rickAndMorty.quotes()
+        val isPopular = false
+        val size = "100"
+        val distanceFromSun = "1001km"
+
+        val id = UUID.randomUUID().toString()
+
+        get("$v1/planet/$id").content.toDto<PlanetResponse>().let { newResponse ->
+            assertEquals(newResponse.status, Status.NotFound)
+            assertNull(newResponse.planet)
+        }
+    }
+
+    companion object {
+        private const val v1 = "/api/v1"
     }
 }
