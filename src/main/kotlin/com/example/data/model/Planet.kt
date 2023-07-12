@@ -1,6 +1,7 @@
 package com.example.data.model
 
 import com.example.data.entity.PlanetEntity
+import com.example.http.response.PlanetDto
 
 
 data class Planet(
@@ -25,5 +26,18 @@ fun PlanetEntity.asPlanet(): Planet {
         this.isPopular,
         this.createdTimestamp.millis,
         this.updatedTimestamp.millis
+    )
+}
+
+fun Planet.asDto(): PlanetDto {
+    return PlanetDto(
+        this.id,
+        this.name,
+        this.description,
+        this.size,
+        this.distanceFromSun,
+        this.isPopular,
+        this.createdTimestamp,
+        this.updatedTimestamp
     )
 }

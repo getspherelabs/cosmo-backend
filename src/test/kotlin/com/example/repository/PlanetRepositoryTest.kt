@@ -1,17 +1,15 @@
-package com.example.dao
+package com.example.repository
 
 import com.example.core.CosmoTest
-import com.example.data.dao.PlanetDao
 import io.github.serpro69.kfaker.faker
 import org.junit.Test
 import org.koin.test.inject
-import java.util.UUID
+import java.util.*
 import kotlin.test.assertEquals
 
-class PlanetDaoTest : CosmoTest() {
+class PlanetRepositoryTest: CosmoTest() {
 
-
-    private val planetDao: PlanetDao by inject()
+    private val planetRepository: PlanetRepository by inject()
     private val faker = faker { }
 
     @Test
@@ -22,14 +20,14 @@ class PlanetDaoTest : CosmoTest() {
         val size = "100"
         val distanceFromSun = "1001km"
 
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
             size = size,
             distanceFromSun = distanceFromSun
         )
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
@@ -37,7 +35,7 @@ class PlanetDaoTest : CosmoTest() {
             distanceFromSun = distanceFromSun
         )
 
-        val planetCounts = planetDao.getPlanetCounts()
+        val planetCounts = planetRepository.getPlanetCounts()
 
         assertEquals(2, planetCounts)
     }
@@ -50,14 +48,14 @@ class PlanetDaoTest : CosmoTest() {
         val size = "100"
         val distanceFromSun = "1001km"
 
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
             size = size,
             distanceFromSun = distanceFromSun
         )
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
@@ -65,7 +63,7 @@ class PlanetDaoTest : CosmoTest() {
             distanceFromSun = distanceFromSun
         )
 
-        val planets = planetDao.getPlanets()
+        val planets = planetRepository.getPlanets()
 
         assertEquals(desc, planets.first().description)
     }
@@ -78,14 +76,14 @@ class PlanetDaoTest : CosmoTest() {
         val size = "100"
         val distanceFromSun = "1001km"
 
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
             size = size,
             distanceFromSun = distanceFromSun
         )
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
@@ -93,9 +91,9 @@ class PlanetDaoTest : CosmoTest() {
             distanceFromSun = distanceFromSun
         )
 
-        planetDao.removeAll()
+        planetRepository.removeAll()
 
-        val planetCounts = planetDao.getPlanetCounts()
+        val planetCounts = planetRepository.getPlanetCounts()
 
         assertEquals(0, planetCounts)
     }
@@ -108,14 +106,14 @@ class PlanetDaoTest : CosmoTest() {
         val size = "100"
         val distanceFromSun = "1001km"
 
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
             size = size,
             distanceFromSun = distanceFromSun
         )
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
@@ -123,8 +121,8 @@ class PlanetDaoTest : CosmoTest() {
             distanceFromSun = distanceFromSun
         )
 
-        val firstPlanet = planetDao.getPlanets().first()
-        val newPlanet = planetDao.getPlanetById(firstPlanet.id)
+        val firstPlanet = planetRepository.getPlanets().first()
+        val newPlanet = planetRepository.getPlanetById(firstPlanet.id)
 
         assertEquals(newPlanet, firstPlanet)
     }
@@ -137,14 +135,14 @@ class PlanetDaoTest : CosmoTest() {
         val size = "100"
         val distanceFromSun = "1001km"
 
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
             size = size,
             distanceFromSun = distanceFromSun
         )
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
@@ -152,8 +150,8 @@ class PlanetDaoTest : CosmoTest() {
             distanceFromSun = distanceFromSun
         )
 
-        val firstPlanet = planetDao.getPlanets().first()
-        val exists = planetDao.exists(firstPlanet.id)
+        val firstPlanet = planetRepository.getPlanets().first()
+        val exists = planetRepository.exists(firstPlanet.id)
 
         assertEquals(true, exists)
     }
@@ -166,14 +164,14 @@ class PlanetDaoTest : CosmoTest() {
         val size = "100"
         val distanceFromSun = "1001km"
 
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
             size = size,
             distanceFromSun = distanceFromSun
         )
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
@@ -181,7 +179,7 @@ class PlanetDaoTest : CosmoTest() {
             distanceFromSun = distanceFromSun
         )
 
-        val exists = planetDao.exists(UUID.randomUUID().toString())
+        val exists = planetRepository.exists(UUID.randomUUID().toString())
 
         assertEquals(false, exists)
     }
@@ -194,14 +192,14 @@ class PlanetDaoTest : CosmoTest() {
         val size = "100"
         val distanceFromSun = "1001km"
 
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
             size = size,
             distanceFromSun = distanceFromSun
         )
-        planetDao.insert(
+        planetRepository.insert(
             name = planetName,
             description = desc,
             isPopular = isPopular,
@@ -209,9 +207,9 @@ class PlanetDaoTest : CosmoTest() {
             distanceFromSun = distanceFromSun
         )
 
-        val firstPlanet = planetDao.getPlanets().first()
-        val result = planetDao.deleteById(firstPlanet.id)
-        val planetCounts = planetDao.getPlanetCounts()
+        val firstPlanet = planetRepository.getPlanets().first()
+        val result = planetRepository.deleteById(firstPlanet.id)
+        val planetCounts = planetRepository.getPlanetCounts()
 
         assertEquals(true, result)
         assertEquals(1, planetCounts)

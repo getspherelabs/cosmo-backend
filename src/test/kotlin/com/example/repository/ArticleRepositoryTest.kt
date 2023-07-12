@@ -1,16 +1,14 @@
-package com.example.dao
+package com.example.repository
 
 import com.example.core.CosmoTest
-import com.example.data.dao.ArticleDao
 import io.github.serpro69.kfaker.faker
 import org.junit.Test
 import org.koin.test.inject
-
 import kotlin.test.assertEquals
 
-class ArticleDaoTest : CosmoTest() {
+class ArticleRepositoryTest : CosmoTest() {
 
-    private val articleDao: ArticleDao by inject()
+    private val articleRepository: ArticleRepository by inject()
     private val faker = faker { }
 
     @Test
@@ -19,14 +17,14 @@ class ArticleDaoTest : CosmoTest() {
         val desc = faker.space.star()
         val author = faker.name.name()
 
-        articleDao.insert(articleTitle, desc, author)
-        articleDao.insert(articleTitle, desc, author)
+        articleRepository.insert(articleTitle, desc, author)
+        articleRepository.insert(articleTitle, desc, author)
 
-        val articles = articleDao.getArticleCounts()
+        val articles = articleRepository.getArticleCounts()
 
         assertEquals(2, articles)
 
-        articleDao.removeAll()
+        articleRepository.removeAll()
     }
 
     @Test
@@ -35,10 +33,10 @@ class ArticleDaoTest : CosmoTest() {
         val desc = faker.space.star()
         val author = faker.name.name()
 
-        articleDao.insert(articleTitle, desc, author)
-        articleDao.insert(articleTitle, desc, author)
+        articleRepository.insert(articleTitle, desc, author)
+        articleRepository.insert(articleTitle, desc, author)
 
-        val articles = articleDao.getArticles()
+        val articles = articleRepository.getArticles()
 
         println(articles)
 
@@ -51,12 +49,12 @@ class ArticleDaoTest : CosmoTest() {
         val desc = faker.space.star()
         val author = faker.name.name()
 
-        articleDao.insert(articleTitle, desc, author)
-        articleDao.insert(articleTitle, desc, author)
+        articleRepository.insert(articleTitle, desc, author)
+        articleRepository.insert(articleTitle, desc, author)
 
-        articleDao.removeAll()
+        articleRepository.removeAll()
 
-        val articles = articleDao.getArticles()
+        val articles = articleRepository.getArticles()
 
         assertEquals(0, articles.size)
     }
@@ -67,11 +65,11 @@ class ArticleDaoTest : CosmoTest() {
         val desc = faker.space.star()
         val author = faker.name.name()
 
-        articleDao.insert(articleTitle, desc, author)
-        articleDao.insert(articleTitle, desc, author)
+        articleRepository.insert(articleTitle, desc, author)
+        articleRepository.insert(articleTitle, desc, author)
 
-        val firstArticle = articleDao.getArticles().first()
-        val newArticle = articleDao.getArticleById(firstArticle.id)
+        val firstArticle = articleRepository.getArticles().first()
+        val newArticle = articleRepository.getArticleById(firstArticle.id)
 
         assertEquals(newArticle, firstArticle)
 
@@ -83,11 +81,11 @@ class ArticleDaoTest : CosmoTest() {
         val desc = faker.space.star()
         val author = faker.name.name()
 
-        articleDao.insert(articleTitle, desc, author)
-        articleDao.insert(articleTitle, desc, author)
+        articleRepository.insert(articleTitle, desc, author)
+        articleRepository.insert(articleTitle, desc, author)
 
-        val firstArticle = articleDao.getArticles().first()
-        val result = articleDao.exists(firstArticle.id)
+        val firstArticle = articleRepository.getArticles().first()
+        val result = articleRepository.exists(firstArticle.id)
 
         assertEquals(true, result)
     }
@@ -98,12 +96,12 @@ class ArticleDaoTest : CosmoTest() {
         val desc = faker.space.star()
         val author = faker.name.name()
 
-        articleDao.insert(articleTitle, desc, author)
-        articleDao.insert(articleTitle, desc, author)
+        articleRepository.insert(articleTitle, desc, author)
+        articleRepository.insert(articleTitle, desc, author)
 
-        val firstArticle = articleDao.getArticles().first()
-        val result = articleDao.deleteById(firstArticle.id)
-        val articles = articleDao.getArticles()
+        val firstArticle = articleRepository.getArticles().first()
+        val result = articleRepository.deleteById(firstArticle.id)
+        val articles = articleRepository.getArticles()
 
         assertEquals(true, result)
         assertEquals(1, articles.size)

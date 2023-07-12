@@ -35,7 +35,7 @@ open class CosmoTest: KoinTest {
     }
 
     protected fun withApp(test: suspend TestApplicationEngine.() -> Unit) {
-        withTestApplication(Application::configureKoin) {
+        withTestApplication(Application::module) {
             runBlocking {
                 test()
             }

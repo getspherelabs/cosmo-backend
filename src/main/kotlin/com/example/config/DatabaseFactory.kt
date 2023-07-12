@@ -1,44 +1,23 @@
 package com.example.config
 
-import com.example.entity.PlanetEntity
-import com.example.table.PlanetTable
-import com.example.table.StarTable
+import com.example.data.table.tables
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
-import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
-import org.joda.time.DateTime
 
 object DatabaseFactory {
 
     fun init(configuration: Configuration) {
         Database.connect(hikari(configuration))
         createTables()
-        transaction {
-            PlanetTable.insert {
-                it[name] = "Mars"
-                it[size] = "100"
-                it[distanceFromSun] = "100 km"
-                it[description] = "Blah"
-                it[createdTimestamp] = DateTime.now()
-            }
-        }
     }
 
     fun init() {
         Database.connect(hikari())
         createTables()
-        transaction {
-            PlanetTable.insert {
-                it[name] = "Mars"
-                it[size] = "100"
-                it[distanceFromSun] = "100 km"
-                it[description] = "Blah"
-                it[createdTimestamp] = DateTime.now()
-            }
-        }
+
     }
 
     private fun hikari(): HikariDataSource {
@@ -51,6 +30,7 @@ object DatabaseFactory {
         config.validate()
         return HikariDataSource(config)
     }
+
     private fun hikari(configuration: Configuration): HikariDataSource {
         val hikariConfig = HikariConfig().apply {
             driverClassName = "org.h2.Driver"
@@ -66,8 +46,7 @@ object DatabaseFactory {
 
     private fun createTables() {
         transaction {
-            SchemaUtils.create(PlanetTable)
-            SchemaUtils.create(StarTable)
+            SchemaUtils.createMissingTablesAndColumns(*tables.toTypedArray())
         }
     }
 }

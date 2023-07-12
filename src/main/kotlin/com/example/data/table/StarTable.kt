@@ -9,7 +9,7 @@ object StarTable : UUIDTable() {
     var description = text(name = "star_description")
     var size = varchar(name = "star_size", length = 20)
     var distanceFromSun = text(name = "planet_distance_from_sun")
-    var isPopular = bool(name = "is_popular")
+    var isPopular = bool(name = "is_popular").default(false)
     var createdTimestamp = datetime(name = "created_timestamp").default(DateTime.now())
     var updatedTimestamp = datetime(name = "updated_timestamp").default(DateTime.now())
 }
