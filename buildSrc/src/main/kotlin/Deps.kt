@@ -19,6 +19,9 @@ object Libs {
         const val json = "io.ktor:ktor-serialization-kotlinx-json-jvm:${Version.ktor}"
         const val netty = "io.ktor:ktor-server-netty-jvm:${Version.ktor}"
         const val cors = "io.ktor:ktor-server-cors:${Version.ktor}"
+        const val swagger = "io.ktor:ktor-server-swagger:${Version.ktor}"
+        const val openApi = "io.ktor:ktor-server-openapi:${Version.ktor}"
+        const val swaggerUi = "io.github.smiley4:ktor-swagger-ui:2.2.0"
     }
 
     object Exposed {
