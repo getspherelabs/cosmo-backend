@@ -15,6 +15,7 @@ val module = SerializersModule {
     polymorphic(Response::class) {
         subclass(PlanetIdResponse::class)
         subclass(PlanetsResponse::class)
+        subclass(PlanetResponse::class)
     }
 
 }
