@@ -2,6 +2,7 @@ package com.example.plugins
 
 import com.example.http.Response
 import com.example.http.response.PlanetIdResponse
+import com.example.http.response.PlanetResponse
 import com.example.http.response.PlanetsResponse
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
@@ -16,6 +17,7 @@ val module = SerializersModule {
     polymorphic(Response::class) {
         subclass(PlanetIdResponse::class)
         subclass(PlanetsResponse::class)
+        subclass(PlanetResponse::class)
     }
 }
 

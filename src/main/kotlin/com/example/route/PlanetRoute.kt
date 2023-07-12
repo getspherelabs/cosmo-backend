@@ -20,7 +20,7 @@ fun Route.planetRoute() {
     }
 
     route("/planet/") {
-        post(path = "/new") {
+        post(path = "new") {
             val request = call.receive<PlanetRequest>()
 
             val newPlanet = controller.addPlanet(request)
@@ -30,7 +30,14 @@ fun Route.planetRoute() {
             call.respond(response.code, response.body)
         }
 
-        put("/{id}") {
+        get(path = "{id}") {
+            val requestId = call.parameters["id"] ?: return@get
+            val newPlanet = controller.getPlanetById(requestId)
+            val response = httpResponse(newPlanet)
+            call.respond(response.code, response.body)
+        }
+
+        put(path = "{id}") {
             val requestId = call.parameters["id"] ?: return@put
             val newRequest = runCatching {
                 call.receive<PlanetRequest>()
@@ -44,7 +51,8 @@ fun Route.planetRoute() {
 
             call.respond(response.code, response.body)
         }
-        delete("/{id}") {
+
+        delete("{id}") {
             val requestId = call.parameters["id"] ?: return@delete
 
             val planetRequest = controller.deletePlanetById(requestId)
@@ -60,12 +68,10 @@ fun Route.planetRoute() {
         call.respond(response.code, response.body)
     }
 
-    delete("/planets") {
+    delete(path = "/planets") {
         val planets = controller.removeAll()
         val response = httpResponse(planets)
 
         call.respond(response.code, response.body)
     }
-
-
 }
