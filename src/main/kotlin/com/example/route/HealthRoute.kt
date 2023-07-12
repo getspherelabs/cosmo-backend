@@ -1,4 +1,4 @@
-package com.example.routing
+package com.example.route
 
 import io.ktor.server.application.*
 import io.ktor.server.response.*

@@ -1,4 +1,5 @@
-package com.example.model
+package com.example.http
+
 
 interface Response {
     val status: Status

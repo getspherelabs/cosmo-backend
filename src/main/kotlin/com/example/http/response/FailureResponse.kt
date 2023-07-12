@@ -1,7 +1,7 @@
-package com.example.model.response
+package com.example.http.response
 
-import com.example.model.Response
-import com.example.model.Status
+import com.example.http.Response
+import com.example.http.Status
 import kotlinx.serialization.Serializable
 
 @Serializable
