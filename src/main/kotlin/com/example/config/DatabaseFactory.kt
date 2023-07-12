@@ -17,7 +17,6 @@ object DatabaseFactory {
     fun init() {
         Database.connect(hikari())
         createTables()
-
     }
 
     private fun hikari(): HikariDataSource {

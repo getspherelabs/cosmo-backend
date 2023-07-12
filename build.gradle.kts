@@ -21,6 +21,7 @@ application {
 repositories {
     mavenCentral()
     jcenter()
+    maven(url = "https://jitpack.io")
 }
 
 dependencies {
@@ -31,6 +32,8 @@ dependencies {
     implementation(Libs.Ktor.json)
     implementation(Libs.Ktor.cors)
     implementation(Libs.Ktor.netty)
+    implementation(Libs.Ktor.openApi)
+    implementation(Libs.Ktor.swaggerUi)
     implementation(Libs.Exposed.core)
     implementation(Libs.Exposed.dao)
     implementation(Libs.Exposed.jdbc)
