@@ -1,4 +1,4 @@
-package com.example.common
+package com.example.common.route
 
 import io.github.smiley4.ktorswaggerui.dsl.get
 import io.ktor.http.*

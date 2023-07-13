@@ -1,4 +1,4 @@
-package com.example.plugins
+package com.example.common.plugins
 
 import io.github.smiley4.ktorswaggerui.SwaggerUI
 import io.ktor.server.application.*

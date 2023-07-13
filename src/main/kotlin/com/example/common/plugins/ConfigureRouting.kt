@@ -1,7 +1,7 @@
-package com.example.plugins
+package com.example.common.plugins
 
-import com.example.common.check
-import com.example.common.v1
+import com.example.common.route.check
+import com.example.common.route.v1
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
 

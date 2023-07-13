@@ -1,4 +1,4 @@
-package com.example.plugins
+package com.example.common.plugins
 
 import com.example.di.controllerModule
 import com.example.di.daoModule
