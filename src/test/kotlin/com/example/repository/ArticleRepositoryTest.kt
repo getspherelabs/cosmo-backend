@@ -2,7 +2,7 @@ package com.example.repository
 
 import com.example.core.CosmoTest
 import com.example.features.article.ArticleRepository
-import io.github.serpro69.kfaker.faker
+import com.example.utils.Faker
 import org.junit.Test
 import org.koin.test.inject
 import kotlin.test.assertEquals
@@ -10,13 +10,12 @@ import kotlin.test.assertEquals
 class ArticleRepositoryTest : CosmoTest() {
 
     private val articleRepository: ArticleRepository by inject()
-    private val faker = faker { }
 
     @Test
     fun `should insert article and verify counts`() = withApp {
-        val articleTitle = faker.space.moon()
-        val desc = faker.space.star()
-        val author = faker.name.name()
+        val articleTitle = Faker.Article.title
+        val desc = Faker.Article.description
+        val author = Faker.Article.author
 
         articleRepository.insert(articleTitle, desc, author)
         articleRepository.insert(articleTitle, desc, author)
@@ -30,9 +29,9 @@ class ArticleRepositoryTest : CosmoTest() {
 
     @Test
     fun `should insert article and get articles`() = withApp {
-        val articleTitle = faker.space.moon()
-        val desc = faker.space.star()
-        val author = faker.name.name()
+        val articleTitle = Faker.Article.title
+        val desc = Faker.Article.description
+        val author = Faker.Article.author
 
         articleRepository.insert(articleTitle, desc, author)
         articleRepository.insert(articleTitle, desc, author)
@@ -46,9 +45,9 @@ class ArticleRepositoryTest : CosmoTest() {
 
     @Test
     fun `should insert articles and remove all`() = withApp {
-        val articleTitle = faker.space.moon()
-        val desc = faker.space.star()
-        val author = faker.name.name()
+        val articleTitle = Faker.Article.title
+        val desc = Faker.Article.description
+        val author = Faker.Article.author
 
         articleRepository.insert(articleTitle, desc, author)
         articleRepository.insert(articleTitle, desc, author)
@@ -62,9 +61,9 @@ class ArticleRepositoryTest : CosmoTest() {
 
     @Test
     fun `should insert and get by id`() = withApp {
-        val articleTitle = faker.space.moon()
-        val desc = faker.space.star()
-        val author = faker.name.name()
+        val articleTitle = Faker.Article.title
+        val desc = Faker.Article.description
+        val author = Faker.Article.author
 
         articleRepository.insert(articleTitle, desc, author)
         articleRepository.insert(articleTitle, desc, author)
@@ -78,9 +77,9 @@ class ArticleRepositoryTest : CosmoTest() {
 
     @Test
     fun `should insert and check id`() = withApp {
-        val articleTitle = faker.space.moon()
-        val desc = faker.space.star()
-        val author = faker.name.name()
+        val articleTitle = Faker.Article.title
+        val desc = Faker.Article.description
+        val author = Faker.Article.author
 
         articleRepository.insert(articleTitle, desc, author)
         articleRepository.insert(articleTitle, desc, author)
@@ -93,9 +92,9 @@ class ArticleRepositoryTest : CosmoTest() {
 
     @Test
     fun `should insert articles and delete by id`() = withApp {
-        val articleTitle = faker.space.moon()
-        val desc = faker.space.star()
-        val author = faker.name.name()
+        val articleTitle = Faker.Article.title
+        val desc = Faker.Article.description
+        val author = Faker.Article.author
 
         articleRepository.insert(articleTitle, desc, author)
         articleRepository.insert(articleTitle, desc, author)

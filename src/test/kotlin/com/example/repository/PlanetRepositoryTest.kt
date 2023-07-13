@@ -2,38 +2,31 @@ package com.example.repository
 
 import com.example.core.CosmoTest
 import com.example.features.planet.PlanetRepository
-import io.github.serpro69.kfaker.faker
+import com.example.utils.Faker
 import org.junit.Test
 import org.koin.test.inject
 import java.util.*
 import kotlin.test.assertEquals
 
-class PlanetRepositoryTest: CosmoTest() {
+class PlanetRepositoryTest : CosmoTest() {
 
     private val planetRepository: PlanetRepository by inject()
-    private val faker = faker { }
 
     @Test
     fun `should insert planets and verify counts`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
-
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
         )
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Saturn.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
         )
 
         val planetCounts = planetRepository.getPlanetCounts()
@@ -43,53 +36,34 @@ class PlanetRepositoryTest: CosmoTest() {
 
     @Test
     fun `should insert planet and get planets`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
-
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
-        )
-        planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
         )
 
         val planets = planetRepository.getPlanets()
 
-        assertEquals(desc, planets.first().description)
+        assertEquals(Faker.Planet.Mars.description, planets.first().description)
     }
 
     @Test
     fun `should insert planets and remove all`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
-
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
         )
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Saturn.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
         )
 
         planetRepository.removeAll()
@@ -101,25 +75,19 @@ class PlanetRepositoryTest: CosmoTest() {
 
     @Test
     fun `should insert planets and get by id`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
-
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
         )
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Saturn.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
         )
 
         val firstPlanet = planetRepository.getPlanets().first()
@@ -130,25 +98,19 @@ class PlanetRepositoryTest: CosmoTest() {
 
     @Test
     fun `should insert planet and check id if it is true`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
-
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
         )
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Saturn.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
         )
 
         val firstPlanet = planetRepository.getPlanets().first()
@@ -159,25 +121,19 @@ class PlanetRepositoryTest: CosmoTest() {
 
     @Test
     fun `should insert planet and check id if it is false`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
-
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
         )
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Saturn.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
         )
 
         val exists = planetRepository.exists(UUID.randomUUID().toString())
@@ -187,25 +143,19 @@ class PlanetRepositoryTest: CosmoTest() {
 
     @Test
     fun `should insert planets and delete by id`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
-
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
         )
         planetRepository.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Saturn.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
         )
 
         val firstPlanet = planetRepository.getPlanets().first()

@@ -2,7 +2,7 @@ package com.example.dao
 
 import com.example.core.CosmoTest
 import com.example.data.dao.ArticleDao
-import io.github.serpro69.kfaker.faker
+import com.example.utils.Faker
 import org.junit.Test
 import org.koin.test.inject
 
@@ -11,13 +11,12 @@ import kotlin.test.assertEquals
 class ArticleDaoTest : CosmoTest() {
 
     private val articleDao: ArticleDao by inject()
-    private val faker = faker { }
 
     @Test
     fun `should insert article and verify counts`() = withApp {
-        val articleTitle = faker.space.moon()
-        val desc = faker.space.star()
-        val author = faker.name.name()
+        val articleTitle = Faker.Article.title
+        val desc = Faker.Article.description
+        val author = Faker.Article.author
 
         articleDao.insert(articleTitle, desc, author)
         articleDao.insert(articleTitle, desc, author)
@@ -31,9 +30,9 @@ class ArticleDaoTest : CosmoTest() {
 
     @Test
     fun `should insert article and get articles`() = withApp {
-        val articleTitle = faker.space.moon()
-        val desc = faker.space.star()
-        val author = faker.name.name()
+        val articleTitle = Faker.Article.title
+        val desc = Faker.Article.description
+        val author = Faker.Article.author
 
         articleDao.insert(articleTitle, desc, author)
         articleDao.insert(articleTitle, desc, author)
@@ -47,9 +46,9 @@ class ArticleDaoTest : CosmoTest() {
 
     @Test
     fun `should insert articles and remove all`() = withApp {
-        val articleTitle = faker.space.moon()
-        val desc = faker.space.star()
-        val author = faker.name.name()
+        val articleTitle = Faker.Article.title
+        val desc = Faker.Article.description
+        val author = Faker.Article.author
 
         articleDao.insert(articleTitle, desc, author)
         articleDao.insert(articleTitle, desc, author)
@@ -63,9 +62,9 @@ class ArticleDaoTest : CosmoTest() {
 
     @Test
     fun `should insert and get by id`() = withApp {
-        val articleTitle = faker.space.moon()
-        val desc = faker.space.star()
-        val author = faker.name.name()
+        val articleTitle = Faker.Article.title
+        val desc = Faker.Article.description
+        val author = Faker.Article.author
 
         articleDao.insert(articleTitle, desc, author)
         articleDao.insert(articleTitle, desc, author)
@@ -79,9 +78,9 @@ class ArticleDaoTest : CosmoTest() {
 
     @Test
     fun `should insert and check id`() = withApp {
-        val articleTitle = faker.space.moon()
-        val desc = faker.space.star()
-        val author = faker.name.name()
+        val articleTitle = Faker.Article.title
+        val desc = Faker.Article.description
+        val author = Faker.Article.author
 
         articleDao.insert(articleTitle, desc, author)
         articleDao.insert(articleTitle, desc, author)
@@ -94,9 +93,9 @@ class ArticleDaoTest : CosmoTest() {
 
     @Test
     fun `should insert articles and delete by id`() = withApp {
-        val articleTitle = faker.space.moon()
-        val desc = faker.space.star()
-        val author = faker.name.name()
+        val articleTitle = Faker.Article.title
+        val desc = Faker.Article.description
+        val author = Faker.Article.author
 
         articleDao.insert(articleTitle, desc, author)
         articleDao.insert(articleTitle, desc, author)
