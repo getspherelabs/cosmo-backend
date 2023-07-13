@@ -1,7 +1,7 @@
 package com.example.features.article
 
-import com.example.common.BadRequestException
-import com.example.common.NotFoundException
+import com.example.common.exception.BadRequestException
+import com.example.common.exception.NotFoundException
 
 interface ArticleController {
     suspend fun getArticles(): ArticlesResponse
@@ -12,12 +12,12 @@ interface ArticleController {
     suspend fun deleteArticleById(articleId: String): ArticleIdResponse
 
     suspend fun updateArticle(
-        planetId: String,
+        articleId: String,
         request: ArticleRequest
     ): ArticleIdResponse
 
     suspend fun getArticleById(
-        planetId: String
+        articleId: String
     ): ArticleResponse
 }
 
@@ -81,12 +81,33 @@ class DefaultArticleController(
         }
     }
 
-    override suspend fun updateArticle(planetId: String, request: ArticleRequest): ArticleIdResponse {
-        TODO("Not yet implemented")
+    override suspend fun updateArticle(articleId: String, request: ArticleRequest): ArticleIdResponse {
+        return try {
+            val name = request.title.trim()
+            val description = request.description.trim()
+            val author = request.author.trim()
+
+            validateArticleOrThrow(name, description, author)
+            hasExist(id = articleId)
+
+            val newStarId = repository.update(articleId, name, description, author)
+            ArticleIdResponse.onSuccess(newStarId)
+        } catch (badRequestException: BadRequestException) {
+            ArticleIdResponse.onFailure(badRequestException.message)
+        } catch (notFoundException: NotFoundException) {
+            ArticleIdResponse.onFailure(notFoundException.message)
+        }
     }
 
-    override suspend fun getArticleById(planetId: String): ArticleResponse {
-        TODO("Not yet implemented")
+    override suspend fun getArticleById(articleId: String): ArticleResponse {
+        return try {
+            hasExist(articleId)
+
+            val result = repository.getArticleById(articleId)
+            ArticleResponse.onSuccess(result.asDto())
+        } catch (notFoundException: NotFoundException) {
+           ArticleResponse.onNotFound(notFoundException.message)
+        }
     }
 
     private suspend fun hasExist(id: String) {

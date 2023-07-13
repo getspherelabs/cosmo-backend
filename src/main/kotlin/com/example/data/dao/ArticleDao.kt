@@ -1,9 +1,9 @@
 package com.example.data.dao
 
-import com.example.common.dbQuery
+import com.example.common.extension.dbQuery
 import com.example.data.entity.ArticleEntity
-import com.example.data.model.Article
-import com.example.data.model.asArticle
+import com.example.features.article.Article
+import com.example.features.article.asArticle
 import java.util.UUID
 
 
