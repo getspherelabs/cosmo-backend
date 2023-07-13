@@ -1,6 +1,7 @@
 package com.example.repository
 
 import com.example.core.CosmoTest
+import com.example.features.planet.PlanetRepository
 import io.github.serpro69.kfaker.faker
 import org.junit.Test
 import org.koin.test.inject

@@ -1,11 +1,11 @@
 package com.example.route
 
 import com.example.core.CosmoTest
-import com.example.http.Status
-import com.example.http.request.PlanetRequest
-import com.example.http.response.PlanetIdResponse
-import com.example.http.response.PlanetResponse
-import com.example.http.response.PlanetsResponse
+import com.example.common.http.Status
+import com.example.features.planet.PlanetRequest
+import com.example.features.planet.PlanetIdResponse
+import com.example.features.planet.PlanetResponse
+import com.example.features.planet.PlanetsResponse
 import com.example.utils.*
 import io.github.serpro69.kfaker.faker
 import org.junit.Test

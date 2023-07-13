@@ -2,8 +2,8 @@ package com.example.data.dao
 
 import com.example.common.dbQuery
 import com.example.data.entity.PlanetEntity
-import com.example.data.model.Planet
-import com.example.data.model.asPlanet
+import com.example.features.planet.Planet
+import com.example.features.planet.asPlanet
 import com.example.data.table.PlanetTable
 import java.util.*
 

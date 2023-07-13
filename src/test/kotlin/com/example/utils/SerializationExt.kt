@@ -1,12 +1,11 @@
 package com.example.utils
 
-import com.example.http.Response
-import com.example.http.response.PlanetIdResponse
-import com.example.http.response.PlanetResponse
-import com.example.http.response.PlanetsResponse
+import com.example.common.http.Response
+import com.example.features.planet.PlanetIdResponse
+import com.example.features.planet.PlanetResponse
+import com.example.features.planet.PlanetsResponse
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.modules.PolymorphicModuleBuilder
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass

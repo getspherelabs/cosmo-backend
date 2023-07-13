@@ -2,8 +2,8 @@ package com.example.data.dao
 
 import com.example.common.dbQuery
 import com.example.data.entity.StarEntity
-import com.example.data.model.Star
-import com.example.data.model.asStar
+import com.example.features.star.Star
+import com.example.features.star.asStar
 import java.util.*
 
 interface StarDao {
