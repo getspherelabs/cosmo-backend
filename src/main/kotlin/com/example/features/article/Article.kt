@@ -14,12 +14,23 @@ data class Article(
 
 fun ArticleEntity.asArticle(): Article {
     return Article(
-        id = this.id.value.toString(),
+        id = this.uuid,
         title = this.title,
         description = this.description,
         author = this.author,
         createdTimestamp = this.createdTimestamp.millis,
         updatedTimestamp = this.updatedTimestamp.millis
 
+    )
+}
+
+fun Article.asDto(): ArticleDto {
+    return ArticleDto(
+        id = this.id,
+        title = this.title,
+        description = this.description,
+        author = this.author,
+        createdTimestamp = this.createdTimestamp,
+        updatedTimestamp = this.updatedTimestamp
     )
 }
