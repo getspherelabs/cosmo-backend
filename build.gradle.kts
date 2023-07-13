@@ -9,7 +9,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
-group = "com.example"
+group = "cosmo-backend"
 version = "0.0.1"
 
 application {
