@@ -1,7 +1,7 @@
 package com.example.features.planet
 
-import com.example.common.BadRequestException
-import com.example.common.NotFoundException
+import com.example.common.exception.BadRequestException
+import com.example.common.exception.NotFoundException
 
 interface PlanetController {
     suspend fun getPlanets(): PlanetsResponse

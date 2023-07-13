@@ -1,6 +1,6 @@
 package com.example.features.planet
 
-import com.example.common.BadRequestException
+import com.example.common.exception.BadRequestException
 import com.example.common.http.httpResponse
 import io.ktor.server.application.*
 import io.ktor.server.request.*

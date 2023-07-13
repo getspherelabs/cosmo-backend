@@ -2,7 +2,7 @@ package com.example.dao
 
 import com.example.core.CosmoTest
 import com.example.data.dao.PlanetDao
-import io.github.serpro69.kfaker.faker
+import com.example.utils.Faker
 import org.junit.Test
 import org.koin.test.inject
 import java.util.UUID
@@ -12,29 +12,23 @@ class PlanetDaoTest : CosmoTest() {
 
 
     private val planetDao: PlanetDao by inject()
-    private val faker = faker { }
 
     @Test
     fun `should insert planets and verify counts`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
+        planetDao.insert(
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
+        )
 
         planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
-        )
-        planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Saturn.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
         )
 
         val planetCounts = planetDao.getPlanetCounts()
@@ -44,53 +38,35 @@ class PlanetDaoTest : CosmoTest() {
 
     @Test
     fun `should insert planet and get planets`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
-
         planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
-        )
-        planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
         )
 
         val planets = planetDao.getPlanets()
 
-        assertEquals(desc, planets.first().description)
+        assertEquals(Faker.Planet.Mars.description, planets.first().description)
     }
 
     @Test
     fun `should insert planets and remove all`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
+        planetDao.insert(
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
+        )
 
         planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
-        )
-        planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Saturn.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
         )
 
         planetDao.removeAll()
@@ -102,25 +78,20 @@ class PlanetDaoTest : CosmoTest() {
 
     @Test
     fun `should insert planets and get by id`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
+        planetDao.insert(
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
+        )
 
         planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
-        )
-        planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Saturn.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
         )
 
         val firstPlanet = planetDao.getPlanets().first()
@@ -131,25 +102,20 @@ class PlanetDaoTest : CosmoTest() {
 
     @Test
     fun `should insert planet and check id if it is true`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
+        planetDao.insert(
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
+        )
 
         planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
-        )
-        planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Saturn.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
         )
 
         val firstPlanet = planetDao.getPlanets().first()
@@ -160,25 +126,20 @@ class PlanetDaoTest : CosmoTest() {
 
     @Test
     fun `should insert planet and check id if it is false`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
+        planetDao.insert(
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
+        )
 
         planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
-        )
-        planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Saturn.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
         )
 
         val exists = planetDao.exists(UUID.randomUUID().toString())
@@ -188,25 +149,20 @@ class PlanetDaoTest : CosmoTest() {
 
     @Test
     fun `should insert planets and delete by id`() = withApp {
-        val planetName = faker.space.planet()
-        val desc = faker.rickAndMorty.quotes()
-        val isPopular = false
-        val size = "100"
-        val distanceFromSun = "1001km"
+        planetDao.insert(
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
+        )
 
         planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
-        )
-        planetDao.insert(
-            name = planetName,
-            description = desc,
-            isPopular = isPopular,
-            size = size,
-            distanceFromSun = distanceFromSun
+            name = Faker.Planet.Saturn.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
         )
 
         val firstPlanet = planetDao.getPlanets().first()

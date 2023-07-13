@@ -1,6 +1,6 @@
 package com.example.data.dao
 
-import com.example.common.dbQuery
+import com.example.common.extension.dbQuery
 import com.example.data.entity.PlanetEntity
 import com.example.features.planet.Planet
 import com.example.features.planet.asPlanet

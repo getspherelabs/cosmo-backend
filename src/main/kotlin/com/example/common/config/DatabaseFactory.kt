@@ -1,5 +1,6 @@
 package com.example.common.config
 
+import com.example.common.extension.prepareTables
 import com.example.data.table.tables
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -44,8 +45,6 @@ object DatabaseFactory {
     }
 
     private fun createTables() {
-        transaction {
-            SchemaUtils.createMissingTablesAndColumns(*tables.toTypedArray())
-        }
+        prepareTables(*tables.toTypedArray())
     }
 }
