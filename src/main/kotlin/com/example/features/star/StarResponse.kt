@@ -1,7 +1,6 @@
 package com.example.features.star
 
-import com.example.features.planet.PlanetDto
-import com.example.features.planet.PlanetsResponse
+
 import com.example.common.http.Response
 import com.example.common.http.Status
 import kotlinx.serialization.Serializable
@@ -24,13 +23,13 @@ data class StarsResponse(
     val list: List<StarDto> = emptyList()
 ): Response {
     companion object {
-        fun onSuccess(planets: List<PlanetDto>) = PlanetsResponse(
+        fun onSuccess(stars: List<StarDto>) = StarsResponse(
             Status.Success,
             "Get stars successful",
-            planets
+            stars
         )
 
-        fun onFailure(message: String) = PlanetsResponse(
+        fun onFailure(message: String) = StarsResponse(
             Status.Failed,
             message
         )

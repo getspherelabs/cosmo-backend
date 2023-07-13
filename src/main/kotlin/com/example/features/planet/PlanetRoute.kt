@@ -1,7 +1,6 @@
 package com.example.features.planet
 
 import com.example.common.BadRequestException
-import com.example.controller.PlanetController
 import com.example.common.http.httpResponse
 import io.ktor.server.application.*
 import io.ktor.server.request.*

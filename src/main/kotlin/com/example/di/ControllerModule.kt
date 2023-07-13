@@ -2,8 +2,8 @@ package com.example.di
 
 import com.example.features.article.ArticleController
 import com.example.features.article.DefaultArticleController
-import com.example.controller.DefaultPlanetController
-import com.example.controller.PlanetController
+import com.example.features.planet.DefaultPlanetController
+import com.example.features.planet.PlanetController
 import org.koin.dsl.module
 
 val controllerModule = module {
