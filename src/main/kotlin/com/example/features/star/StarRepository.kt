@@ -31,6 +31,8 @@ interface StarRepository {
         distanceFromSun: String,
         isPopular: Boolean
     ): String
+
+    suspend fun getPopularStars(): List<Star>
 }
 
 class DefaultStarRepository(
@@ -79,5 +81,9 @@ class DefaultStarRepository(
         isPopular: Boolean
     ): String {
         return dao.update(id, name, description, size, distanceFromSun, isPopular)
+    }
+
+    override suspend fun getPopularStars(): List<Star> {
+        return dao.getPopularStars()
     }
 }

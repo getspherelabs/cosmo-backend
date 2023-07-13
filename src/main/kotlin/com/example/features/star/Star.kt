@@ -7,6 +7,7 @@ data class Star(
     val name: String,
     val description: String,
     val size: String,
+    val isPopular: Boolean,
     val distanceFromSun: String,
     val createdTimestamp: Long,
     val updatedTimestamp: Long
@@ -19,8 +20,22 @@ fun StarEntity.asStar(): Star {
         name = this.name,
         description = this.description,
         size = this.size,
+        isPopular = this.isPopular,
         distanceFromSun = this.distanceFromSun,
         createdTimestamp = this.createdTimestamp.millis,
         updatedTimestamp = this.updatedTimestamp.millis
+    )
+}
+
+fun Star.asDto(): StarDto {
+    return StarDto(
+        id = this.id,
+        name = this.name,
+        description = this.description,
+        size = this.size,
+        isPopular = this.isPopular,
+        distanceFromSun = this.distanceFromSun,
+        createdTimestamp = this.createdTimestamp,
+        updatedTimestamp = this.updatedTimestamp
     )
 }

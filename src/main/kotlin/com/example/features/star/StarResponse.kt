@@ -17,11 +17,12 @@ data class StarDto(
     val updatedTimestamp: Long
 )
 
+@Serializable
 data class StarsResponse(
     override val status: Status,
     override val message: String,
     val list: List<StarDto> = emptyList()
-): Response {
+) : Response {
     companion object {
         fun onSuccess(stars: List<StarDto>) = StarsResponse(
             Status.Success,
@@ -32,6 +33,65 @@ data class StarsResponse(
         fun onFailure(message: String) = StarsResponse(
             Status.Failed,
             message
+        )
+    }
+}
+
+@Serializable
+data class StarIdResponse(
+    override val status: Status,
+    override val message: String,
+    val id: String? = null
+) : Response {
+
+    companion object {
+        fun onFailure(message: String): StarIdResponse {
+            return StarIdResponse(
+                Status.Failed,
+                message
+            )
+        }
+
+        fun onNotFound(message: String): StarIdResponse {
+            return StarIdResponse(
+                Status.NotFound,
+                message
+            )
+        }
+
+        fun onSuccess(id: String) = StarIdResponse(
+            Status.Success,
+            "Task was successful",
+            id
+        )
+    }
+}
+
+@Serializable
+data class StarResponse(
+    override val status: Status,
+    override val message: String,
+    val planet: StarDto? = null
+) : Response {
+    companion object {
+        fun onFailure(message: String): StarResponse {
+            return StarResponse(
+                Status.Failed,
+                message
+            )
+        }
+
+        fun onNotFound(message: String): StarResponse {
+            return StarResponse(
+                Status.NotFound,
+                message
+            )
+        }
+
+        fun onSuccess(star: StarDto) = StarResponse(
+            Status.Success,
+            "Task was successful",
+            star
         )
     }
 }
