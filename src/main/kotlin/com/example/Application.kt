@@ -9,12 +9,9 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.example.plugins.*
+import io.ktor.util.*
 
-
-fun main() {
-    embeddedServer(Netty, port = 8080, host = "localhost", module = Application::module)
-        .start(wait = true)
-}
+fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 fun Application.module() {
     configureKoin()
@@ -22,5 +19,14 @@ fun Application.module() {
     configureRouting()
     configureCors()
     configureSwagger()
+    val config = environment.config
+    DatabaseFactory.initWithPostgres(config)
+}
+
+fun Application.testModule() {
+    configureKoin()
+    configureSerialization()
+    configureRouting()
+    configureCors()
     DatabaseFactory.init()
 }

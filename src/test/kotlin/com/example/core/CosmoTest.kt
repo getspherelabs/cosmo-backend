@@ -2,6 +2,7 @@ package com.example.core
 
 import com.example.data.table.tables
 import com.example.module
+import com.example.testModule
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.application.*
@@ -33,7 +34,7 @@ open class CosmoTest: KoinTest {
     }
 
     protected fun withApp(test: suspend TestApplicationEngine.() -> Unit) {
-        withTestApplication(Application::module) {
+        withTestApplication(Application::testModule) {
             runBlocking {
                 test()
             }
