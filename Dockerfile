@@ -1,14 +1,17 @@
-FROM gradle:7-jdk11 AS build
-COPY --chown=gradle:gradle . /home/gradle/src
-WORKDIR /home/gradle/src
-RUN gradle buildFatJar --no-daemon
+FROM openjdk:11-jdk-slim
 
-ARG EnvironmentVariable
-ARG RAILWAY_ENVIRONMENT
-ENV RAILWAY_ENVIRONMENT=$RAILWAY_ENVIRONMENT
+WORKDIR /src
+COPY . /src
 
-FROM openjdk:11
-EXPOSE 8080:8080
-RUN mkdir /app
-COPY --from=build /home/gradle/src/build/libs/cosmo-backend.jar /app/cosmo-backend.jar
-ENTRYPOINT ["java","-jar","/app/cosmo-backend.jar"]
+RUN apt-get update
+RUN apt-get install -y dos2unix
+RUN dos2unix gradlew
+
+RUN bash gradlew fatJar
+
+WORKDIR /run
+RUN cp /src/build/libs/cosmo-backend.jar /run/cosmo-backend.jar
+
+EXPOSE 8080
+
+CMD java -jar /run/cosmo-backend.jar

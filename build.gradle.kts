@@ -25,6 +25,13 @@ ktor {
     }
 }
 
+tasks {
+    shadowJar {
+        manifest {
+            attributes(Pair("Main-Class","com.example.ApplicationKt"))
+        }
+    }
+}
 tasks.create("stage").dependsOn("installDist")
 
 repositories {
