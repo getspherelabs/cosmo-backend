@@ -68,8 +68,6 @@ tasks.getByName("build").finalizedBy("installDist")
 
 
 tasks.withType<ShadowJar> {
-    mergeServiceFiles()
-    archiveFileName.set("cosmo-backend.jar")
     manifest {
         attributes(
             mapOf(
