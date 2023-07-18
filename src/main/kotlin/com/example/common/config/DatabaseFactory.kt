@@ -41,7 +41,7 @@ object DatabaseFactory {
         val port = databaseConfig.property("database.port").getString().toInt()
 
         hikariConfiguration.driverClassName = "org.postgresql.ds.PGSimpleDataSource"
-        hikariConfiguration.jdbcUrl = "jdbc:postgresql://$host:$password:$port/$name"
+        hikariConfiguration.jdbcUrl = "jdbc:postgresql://$host:$port/$name"
         hikariConfiguration.username = user
         hikariConfiguration.isAutoCommit = false
         hikariConfiguration.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
