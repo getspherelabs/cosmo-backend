@@ -19,20 +19,6 @@ application {
     mainClass.set("io.ktor.server.netty.EngineMain")
 }
 
-ktor {
-    fatJar {
-        archiveFileName.set("cosmo-backend.jar")
-    }
-}
-
-tasks {
-    shadowJar {
-        manifest {
-            attributes(Pair("Main-Class","com.example.ApplicationKt"))
-        }
-    }
-}
-tasks.create("stage").dependsOn("installDist")
 
 repositories {
     mavenCentral()
@@ -73,6 +59,7 @@ dependencies {
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
+tasks.getByName("build").finalizedBy("installDist")
 
 tasks.withType<ShadowJar> {
     mergeServiceFiles()

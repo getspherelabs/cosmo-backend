@@ -1,1 +1,1 @@
-web: java -jar /build/libs/cosmo-backend.jar
+web: application/build/install/application/bin/application
