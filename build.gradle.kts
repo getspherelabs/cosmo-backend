@@ -14,7 +14,7 @@ plugins {
 
 
 application {
-    group = "com.example"
+    group = "com.example.cosmo"
     version = "0.1.0"
     mainClass.set("io.ktor.server.netty.EngineMain")
 }
@@ -29,6 +29,7 @@ repositories {
     maven(url = "https://kotlin.bintray.com/ktor")
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
 }
+
 
 dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
@@ -56,6 +57,7 @@ dependencies {
     testImplementation(Libs.Ktor.test)
     testImplementation(Libs.H2.h2)
     testImplementation(Libs.Coroutine.test)
+    implementation("io.ktor:ktor-server-config-yaml:2.3.1")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

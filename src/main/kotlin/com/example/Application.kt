@@ -6,12 +6,10 @@ import com.example.common.plugins.configureRouting
 import com.example.common.plugins.configureSerialization
 import com.example.common.plugins.configureSwagger
 import io.ktor.server.application.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
 import com.example.plugins.*
 import io.ktor.util.*
 
-fun main(args: Array<String>): Unit = EngineMain.main(args)
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
     configureKoin()

@@ -33,11 +33,11 @@ object DatabaseFactory {
 
     private fun hikariWithPostgres(databaseConfig: ApplicationConfig): HikariDataSource {
         val config = HikariConfig()
-        val host = System.getenv("PGHOST")
-        val name = System.getenv("PGDATABASE")
-        val user = System.getenv("PGUSER")
-        val password = System.getenv("PGPASSWORD")
-        val port = System.getenv("PGPORT")
+        val host = databaseConfig.property("database.host")
+        val name = databaseConfig.property("database.name")
+        val user = databaseConfig.property("database.username")
+        val password = databaseConfig.property("database.password")
+        val port = databaseConfig.property("database.port")
 
         config.driverClassName = "org.postgresql.ds.PGSimpleDataSource"
         config.jdbcUrl = "jdbc:postgresql://containers-us-west-168.railway.app:7997/railway"
