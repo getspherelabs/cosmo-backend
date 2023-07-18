@@ -23,6 +23,7 @@ application {
 
 tasks {
     create("stage").dependsOn("installDist")
+    create("state").dependsOn("buildFatJar")
 }
 
 repositories {
