@@ -33,13 +33,13 @@ object DatabaseFactory {
 
     private fun hikariWithPostgres(databaseConfig: ApplicationConfig): HikariDataSource {
         val config = HikariConfig()
-        val host = databaseConfig.property("ktor.database.host").getString()
-        val name = databaseConfig.property("ktor.database.name").getString()
-        val user = databaseConfig.property("ktor.database.user").getString()
-        val password = databaseConfig.property("ktor.database.password").getString()
-        val port = databaseConfig.property("ktor.database.port").getString()
+        val host = System.getenv("PGHOST")
+        val name = System.getenv("PGDATABASE")
+        val user = System.getenv("PGUSER")
+        val password = System.getenv("PGPASSWORD")
+        val port = System.getenv("PGPORT")
 
-        config.driverClassName = databaseConfig.property("ktor.database.driver").getString()
+        config.driverClassName = "org.postgresql.ds.PGSimpleDataSource"
         config.jdbcUrl = "jdbc:postgresql://$host:$port/$name"
         config.password = password
         config.username = user
