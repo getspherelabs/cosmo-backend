@@ -19,6 +19,11 @@ application {
     mainClass.set("io.ktor.server.netty.EngineMain")
 }
 
+ktor {
+    fatJar {
+        archiveFileName.set("cosmo-backend.jar")
+    }
+}
 
 tasks.create("stage").dependsOn("installDist")
 
