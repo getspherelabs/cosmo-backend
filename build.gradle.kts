@@ -23,7 +23,7 @@ application {
 
 tasks {
     create("stage").dependsOn("installDist")
-    create("state").dependsOn("buildFatJar")
+    create("fatJar").dependsOn("buildFatJar")
 }
 
 repositories {
@@ -69,6 +69,7 @@ tasks.getByName("build").finalizedBy("installDist")
 
 
 tasks.withType<ShadowJar> {
+    archiveFileName.set("cosmo-backend.jar")
     manifest {
         attributes(
             mapOf(
