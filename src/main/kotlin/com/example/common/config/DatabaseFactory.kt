@@ -43,6 +43,7 @@ object DatabaseFactory {
         hikariConfiguration.driverClassName = "org.postgresql.ds.PGSimpleDataSource"
         hikariConfiguration.jdbcUrl = "jdbc:postgresql://$host:$port/$name"
         hikariConfiguration.username = user
+        hikariConfiguration.password = password
         hikariConfiguration.isAutoCommit = false
         hikariConfiguration.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
         hikariConfiguration.validate()
