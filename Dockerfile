@@ -9,5 +9,5 @@ EXPOSE 8080:8080
 
 RUN mkdir /app
 WORKDIR /app
-COPY --from=build /home/gradle/src/build/libs/cosmo-backend.jar /app/cosmo-backend.jar
+COPY --from=build ./build/libs/cosmo-backend.jar /app/cosmo-backend.jar
 ENTRYPOINT ["java","-jar","/app/cosmo-backend.jar"]
