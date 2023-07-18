@@ -1,22 +1,27 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 
 plugins {
-    kotlin("jvm") version "1.8.21"
     application
+    kotlin("jvm") version "1.8.21"
     id("io.ktor.plugin") version "2.3.2"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.21"
 }
 
-group = "com.example"
-version = "0.1.0"
+
 
 application {
+    group = "com.example"
+    version = "0.1.0"
     mainClass.set("io.ktor.server.netty.EngineMain")
+
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
+
 
 tasks.create("stage").dependsOn("installDist")
 
@@ -58,4 +63,9 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
 
+tasks.withType<ShadowJar> {
+    archiveBaseName.set("cosmo-backend")
+    archiveClassifier.set("")
+    archiveVersion.set("")
+}
 
