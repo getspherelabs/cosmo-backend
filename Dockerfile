@@ -1,17 +1,11 @@
-FROM openjdk:11-jdk-slim
+FROM openjdk:11 as builder
 
-WORKDIR /src
-COPY . /src
+COPY . .
 
-RUN apt-get update
-RUN apt-get install -y dos2unix
-RUN dos2unix gradlew
+RUN ./gradlew buildFatJar
 
-RUN bash gradlew fatJar
+FROM openjdk:11
 
-WORKDIR /run
-RUN cp /src/build/libs/cosmo-backend.jar /run/cosmo-backend.jar
+COPY --from=builder /build/libs/cosmo-backend.jar ./cosmo-backend.jar
 
-EXPOSE 8080
-
-CMD java -jar /run/cosmo-backend.jar
+CMD ["java", "-jar", "cosmo-backend.jar"]
