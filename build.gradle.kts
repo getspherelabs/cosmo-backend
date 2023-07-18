@@ -16,7 +16,7 @@ plugins {
 
 application {
     group = "com.example.cosmo"
-    version = "0.2.0"
+    version = "0.3.0"
     mainClass.set("io.ktor.server.netty.EngineMain")
 }
 
