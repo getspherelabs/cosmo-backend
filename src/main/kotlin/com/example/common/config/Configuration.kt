@@ -1,6 +1,9 @@
 package com.example.common.config
 
+import io.ktor.server.config.*
+
 interface Configuration {
+    val config: ApplicationConfig
     val host: String
     val port: String
     val name: String
@@ -10,6 +13,7 @@ interface Configuration {
     val maxPoolSize: Int
 
     data class Builder(
+        var config: ApplicationConfig? = null,
         var host: String = "",
         var port: String = "",
         var name: String = "",
@@ -24,6 +28,9 @@ interface Configuration {
             val builder = Builder().apply(block)
 
             return object : Configuration {
+                override val config: ApplicationConfig = checkNotNull(builder.config) {
+                    "Config is not initialized yet."
+                }
                 override val host: String = builder.host
                 override val port: String = builder.port
                 override val name: String = builder.name

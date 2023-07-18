@@ -32,21 +32,21 @@ object DatabaseFactory {
     }
 
     private fun hikariWithPostgres(databaseConfig: ApplicationConfig): HikariDataSource {
-        val config = HikariConfig()
-        val host = databaseConfig.property("database.host")
-        val name = databaseConfig.property("database.name")
-        val user = databaseConfig.property("database.username")
-        val password = databaseConfig.property("database.password")
-        val port = databaseConfig.property("database.port")
 
-        config.driverClassName = "org.postgresql.ds.PGSimpleDataSource"
-        config.jdbcUrl = "jdbc:postgresql://containers-us-west-168.railway.app:7997/railway"
-        config.password = "HFIgNvZLj9wWD9D466PT"
-        config.username = "postgres"
-        config.isAutoCommit = false
-        config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
-        config.validate()
-        return HikariDataSource(config)
+        val hikariConfiguration = HikariConfig()
+        val host = databaseConfig.property("database.host").getString()
+        val name = databaseConfig.property("database.name").getString()
+        val user = databaseConfig.property("database.username").getString()
+        val password = databaseConfig.property("database.password").getString()
+        val port = databaseConfig.property("database.port").getString().toInt()
+
+        hikariConfiguration.driverClassName = "org.postgresql.ds.PGSimpleDataSource"
+        hikariConfiguration.jdbcUrl = "jdbc:postgresql://$host:$password/$port$name"
+        hikariConfiguration.username = user
+        hikariConfiguration.isAutoCommit = false
+        hikariConfiguration.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
+        hikariConfiguration.validate()
+        return HikariDataSource(hikariConfiguration)
     }
 
     private fun createTables() {
