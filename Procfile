@@ -1,1 +1,1 @@
-web: ./build/install/com.example.cosmo-backend/bin/com.example.cosmo-backend
+web: ./build/install/cosmo-backend/bin/cosmo-backend
