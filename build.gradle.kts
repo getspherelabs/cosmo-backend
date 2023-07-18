@@ -9,15 +9,17 @@ plugins {
     kotlin("jvm") version "1.8.21"
     id("io.ktor.plugin") version "2.3.2"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.21"
+    id("com.github.johnrengelman.shadow") version "6.0.0"
 }
 
 
 
 application {
     group = "com.example.cosmo"
-    version = "0.1.0"
+    version = "0.2.0"
     mainClass.set("io.ktor.server.netty.EngineMain")
 }
+
 
 tasks {
     create("stage").dependsOn("installDist")
@@ -63,6 +65,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
 tasks.getByName("build").finalizedBy("installDist")
+
 
 tasks.withType<ShadowJar> {
     mergeServiceFiles()
