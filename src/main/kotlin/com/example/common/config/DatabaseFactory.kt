@@ -40,9 +40,9 @@ object DatabaseFactory {
         val port = System.getenv("PGPORT")
 
         config.driverClassName = "org.postgresql.ds.PGSimpleDataSource"
-        config.jdbcUrl = "jdbc:postgresql://$host:$port/$name"
-        config.password = password
-        config.username = user
+        config.jdbcUrl = "jdbc:postgresql://containers-us-west-168.railway.app:7997/railway"
+        config.password = "HFIgNvZLj9wWD9D466PT"
+        config.username = "postgres"
         config.isAutoCommit = false
         config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
         config.validate()

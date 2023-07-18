@@ -17,9 +17,6 @@ application {
     group = "com.example"
     version = "0.1.0"
     mainClass.set("io.ktor.server.netty.EngineMain")
-
-    val isDevelopment: Boolean = project.ext.has("development")
-    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
 
@@ -63,9 +60,12 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
 
-tasks.withType<ShadowJar> {
-    archiveBaseName.set("cosmo-backend")
-    archiveClassifier.set("")
-    archiveVersion.set("")
+tasks.withType<Jar> {
+    manifest {
+        attributes(
+            mapOf(
+                "Main-Class" to application.mainClassName
+            )
+        )
+    }
 }
-
