@@ -6,10 +6,11 @@ plugins {
     kotlin("jvm") version "1.8.21"
     application
     id("io.ktor.plugin") version "2.3.1"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.21"
 }
 
-group = "com.example.application"
+group = "com.example"
 version = "0.0.2"
 
 application {
@@ -62,6 +63,24 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
 
+tasks {
+    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+        manifest {
+            attributes["Main-Class"] = application.mainClass
+        }
+    }
+}
+
+tasks.register<Jar>("uberJar") {
+    archiveClassifier.set("uber")
+
+    from(sourceSets.main.get().output)
+
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
+}
 
 tasks.create("stage") {
     dependsOn("installDist")
