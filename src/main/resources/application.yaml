@@ -7,7 +7,7 @@ ktor:
     modules:
       - com.example.ApplicationKt.module
 database:
-  host: "$PGDATABASE:localhost"
+  host: "$PGHOST:localhost"
   port: "$PGPORT:5535"
   name: "$PGDATABASE:cosmo"
   username: "$PGUSER:postgres"
