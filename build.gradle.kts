@@ -23,7 +23,6 @@ application {
 
 tasks {
     create("stage").dependsOn("installDist")
-    create("fatJar").dependsOn("buildFatJar")
 }
 
 repositories {
@@ -65,16 +64,4 @@ dependencies {
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
-tasks.getByName("build").finalizedBy("installDist")
 
-
-tasks.withType<ShadowJar> {
-    archiveFileName.set("cosmo-backend.jar")
-    manifest {
-        attributes(
-            mapOf(
-                "Main-Class" to application.mainClass
-            )
-        )
-    }
-}
