@@ -1,1 +1,1 @@
-web: java -jar .build/libs/com.example.cosmo-backend-0.3.0.jar
+web: com.example.cosmo-backend/build/install/com.example.cosmo-backend/bin/com.example.cosmo-backend
