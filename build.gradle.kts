@@ -4,6 +4,7 @@ val logback_version: String by project
 
 plugins {
     kotlin("jvm") version "1.8.21"
+    application
     id("io.ktor.plugin") version "2.3.1"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.21"
     id("com.github.johnrengelman.shadow") version "7.1.2"
@@ -18,12 +19,18 @@ application {
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
-
+ktor {
+    fatJar {
+        archiveFileName.set("fat.jar")
+    }
+}
 
 repositories {
     mavenCentral()
     jcenter()
     maven(url = "https://jitpack.io")
+    maven(url = "https://kotlin.bintray.com/ktor")
+    maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
 }
 
 dependencies {
@@ -54,4 +61,9 @@ dependencies {
     testImplementation(Libs.Coroutine.test)
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+}
+
+
+tasks.create("stage") {
+    dependsOn("installDist")
 }
