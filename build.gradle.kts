@@ -60,11 +60,12 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
 
-tasks.withType<Jar> {
+tasks.withType<ShadowJar> {
+    mergeServiceFiles()
     manifest {
         attributes(
             mapOf(
-                "Main-Class" to application.mainClassName
+                "Main-Class" to application.mainClass
             )
         )
     }
