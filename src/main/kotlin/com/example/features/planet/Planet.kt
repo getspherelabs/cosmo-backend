@@ -11,7 +11,8 @@ data class Planet(
     val distanceFromSun: String,
     val isPopular: Boolean,
     val createdTimestamp: Long,
-    val updatedTimestamp: Long
+    val updatedTimestamp: Long,
+    val image: String
 )
 
 
@@ -24,7 +25,8 @@ fun PlanetEntity.asPlanet(): Planet {
         this.distanceFromSun,
         this.isPopular,
         this.createdTimestamp.millis,
-        this.updatedTimestamp.millis
+        this.updatedTimestamp.millis,
+        this.image
     )
 }
 
@@ -37,6 +39,7 @@ fun Planet.asDto(): PlanetDto {
         this.distanceFromSun,
         this.isPopular,
         this.createdTimestamp,
-        this.updatedTimestamp
+        this.updatedTimestamp,
+        this.image
     )
 }

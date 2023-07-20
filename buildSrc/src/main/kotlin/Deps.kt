@@ -8,6 +8,7 @@ object Version {
     const val ktor = "2.3.1"
     const val coroutineTest = "1.7.2"
     const val testContainer = "1.18.3"
+    const val flyway = "6.5.2"
 }
 
 object Libs {
@@ -61,5 +62,9 @@ object Libs {
         const val core = "org.testcontainers:testcontainers:${Version.testContainer}"
         const val junit = "org.testcontainers:junit-jupiter:${Version.testContainer}"
         const val postgres = "org.testcontainers:postgresql:${Version.testContainer}"
+    }
+
+    object Flyway {
+        const val core = "org.flywaydb:flyway-core:${Version.flyway}"
     }
 }

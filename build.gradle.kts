@@ -10,6 +10,7 @@ plugins {
     id("io.ktor.plugin") version "2.3.2"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.21"
     id("com.github.johnrengelman.shadow") version "6.0.0"
+    id("org.flywaydb.flyway") version "8.5.4"
 }
 
 
@@ -54,6 +55,7 @@ dependencies {
     implementation(Libs.Koin.ktor)
     implementation(Libs.Koin.core)
     implementation(Libs.Faker.kotlin)
+    implementation(Libs.Flyway.core)
 
     testImplementation(Libs.Koin.test)
     testImplementation(Libs.Hikari.core)
@@ -65,3 +67,10 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
 
+flyway {
+    url = System.getenv("DATABASE_URL")
+    user = System.getenv("PGUSER")
+    password = System.getenv("PGPASSWORD")
+    baselineOnMigrate = true
+    locations = arrayOf("filesystem:resources/db/migrations")
+}

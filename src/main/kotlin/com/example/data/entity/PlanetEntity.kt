@@ -1,6 +1,7 @@
 package com.example.data.entity
 
 import com.example.data.table.PlanetTable
+import com.example.data.table.StarTable.default
 import org.jetbrains.exposed.dao.UUIDEntity
 import org.jetbrains.exposed.dao.UUIDEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
@@ -18,4 +19,5 @@ class PlanetEntity(id: EntityID<UUID>): UUIDEntity(id) {
     var isPopular: Boolean by PlanetTable.isPopular
     var createdTimestamp: DateTime by PlanetTable.createdTimestamp
     var updatedTimestamp: DateTime by PlanetTable.updatedTimestamp
+    var image: String by PlanetTable.image
 }

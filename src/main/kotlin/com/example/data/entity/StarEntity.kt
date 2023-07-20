@@ -20,4 +20,5 @@ class StarEntity(id: EntityID<UUID>) : UUIDEntity(id) {
     var distanceFromSun: String by StarTable.distanceFromSun
     var createdTimestamp: DateTime by StarTable.createdTimestamp
     var updatedTimestamp: DateTime by StarTable.updatedTimestamp
+    var image: String by StarTable.image
 }

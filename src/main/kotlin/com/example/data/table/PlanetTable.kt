@@ -12,4 +12,5 @@ object PlanetTable : UUIDTable() {
     var isPopular = bool(name = "is_popular")
     var createdTimestamp = datetime(name = "created_timestamp").default(DateTime.now())
     var updatedTimestamp = datetime(name = "updated_timestamp").default(DateTime.now())
+    var image = text(name = "planet_image").default("")
 }

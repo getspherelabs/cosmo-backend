@@ -6,6 +6,7 @@ import com.typesafe.config.ConfigFactory
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.config.*
+import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 
 object DatabaseFactory {
@@ -13,6 +14,7 @@ object DatabaseFactory {
     fun initWithPostgres(config: ApplicationConfig) {
         Database.connect(hikariWithPostgres(config))
         createTables()
+        migration(hikariWithPostgres(config))
     }
 
     fun init() {
@@ -29,6 +31,20 @@ object DatabaseFactory {
         config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
         config.validate()
         return HikariDataSource(config)
+    }
+
+    private fun migration(hikari: HikariDataSource) {
+        val flyway = Flyway.configure()
+            .dataSource(hikari)
+            .baselineOnMigrate(true)
+            .load()
+
+        try {
+            flyway.info()
+            flyway.migrate()
+        } catch (e: Exception) {
+            throw e
+        }
     }
 
     private fun hikariWithPostgres(databaseConfig: ApplicationConfig): HikariDataSource {

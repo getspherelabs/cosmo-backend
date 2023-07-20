@@ -10,7 +10,8 @@ data class Star(
     val isPopular: Boolean,
     val distanceFromSun: String,
     val createdTimestamp: Long,
-    val updatedTimestamp: Long
+    val updatedTimestamp: Long,
+    val image: String
 )
 
 
@@ -23,7 +24,8 @@ fun StarEntity.asStar(): Star {
         isPopular = this.isPopular,
         distanceFromSun = this.distanceFromSun,
         createdTimestamp = this.createdTimestamp.millis,
-        updatedTimestamp = this.updatedTimestamp.millis
+        updatedTimestamp = this.updatedTimestamp.millis,
+        image = this.image
     )
 }
 
@@ -36,6 +38,7 @@ fun Star.asDto(): StarDto {
         isPopular = this.isPopular,
         distanceFromSun = this.distanceFromSun,
         createdTimestamp = this.createdTimestamp,
-        updatedTimestamp = this.updatedTimestamp
+        updatedTimestamp = this.updatedTimestamp,
+        image = this.image
     )
 }

@@ -1,5 +1,6 @@
 package com.example.data.table
 
+import com.example.data.table.StarTable.default
 import org.jetbrains.exposed.dao.id.UUIDTable
 import org.jetbrains.exposed.sql.jodatime.datetime
 import org.joda.time.DateTime
@@ -12,4 +13,5 @@ object StarTable : UUIDTable() {
     var isPopular = bool(name = "is_popular").default(false)
     var createdTimestamp = datetime(name = "created_timestamp").default(DateTime.now())
     var updatedTimestamp = datetime(name = "updated_timestamp").default(DateTime.now())
+    var image = text(name = "star_image").default("")
 }

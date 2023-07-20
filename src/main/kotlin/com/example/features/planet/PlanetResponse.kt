@@ -13,7 +13,8 @@ data class PlanetDto(
     val distanceFromSun: String,
     val isPopular: Boolean,
     val createdTimestamp: Long,
-    val updatedTimestamp: Long
+    val updatedTimestamp: Long,
+    val image: String
 )
 
 

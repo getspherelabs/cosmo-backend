@@ -38,7 +38,8 @@ class DefaultPlanetController(
                 newPlanet.distanceFromSun,
                 newPlanet.isPopular,
                 newPlanet.createdTimestamp,
-                newPlanet.updatedTimestamp
+                newPlanet.updatedTimestamp,
+                newPlanet.image
             )
         })
     }
@@ -99,7 +100,8 @@ class DefaultPlanetController(
                     distanceFromSun = newPlanet.distanceFromSun,
                     isPopular = newPlanet.isPopular,
                     createdTimestamp = newPlanet.createdTimestamp,
-                    updatedTimestamp = newPlanet.updatedTimestamp
+                    updatedTimestamp = newPlanet.updatedTimestamp,
+                    image = newPlanet.image
                 )
             })
         } catch (e: Exception) {

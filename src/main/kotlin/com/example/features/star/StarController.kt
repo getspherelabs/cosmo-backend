@@ -41,7 +41,8 @@ class DefaultStarController(
                 newStar.distanceFromSun,
                 newStar.isPopular,
                 newStar.createdTimestamp,
-                newStar.updatedTimestamp
+                newStar.updatedTimestamp,
+                newStar.image
             )
         })
     }
@@ -102,7 +103,8 @@ class DefaultStarController(
                     distanceFromSun = newStar.distanceFromSun,
                     isPopular = newStar.isPopular,
                     createdTimestamp = newStar.createdTimestamp,
-                    updatedTimestamp = newStar.updatedTimestamp
+                    updatedTimestamp = newStar.updatedTimestamp,
+                    image = newStar.image
                 )
             })
         } catch (e: Exception) {
