@@ -2,7 +2,6 @@ package com.example.common.config
 
 import com.example.common.extension.prepareTables
 import com.example.data.table.tables
-import com.typesafe.config.ConfigFactory
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.config.*
@@ -11,13 +10,13 @@ import org.jetbrains.exposed.sql.Database
 
 object DatabaseFactory {
 
-    fun initWithPostgres(config: ApplicationConfig) {
+    fun withPostgres(config: ApplicationConfig) {
         Database.connect(hikariWithPostgres(config))
         createTables()
         migration(hikariWithPostgres(config))
     }
 
-    fun init() {
+    fun withH2() {
         Database.connect(hikari())
         createTables()
     }
@@ -48,25 +47,45 @@ object DatabaseFactory {
     }
 
     private fun hikariWithPostgres(databaseConfig: ApplicationConfig): HikariDataSource {
+        val hikariConfiguration = createHikariConfiguration(databaseConfig)
+        return HikariDataSource(hikariConfiguration)
+    }
 
-        val hikariConfiguration = HikariConfig()
+    private fun createHikariConfiguration(databaseConfig: ApplicationConfig): HikariConfig {
         val host = databaseConfig.property("database.host").getString()
         val name = databaseConfig.property("database.name").getString()
         val user = databaseConfig.property("database.username").getString()
         val password = databaseConfig.property("database.password").getString()
         val port = databaseConfig.property("database.port").getString().toInt()
+        val driver = databaseConfig.property("database.driver").getString()
+        val maxPoolSize = databaseConfig.property("database.poolSize").getString().toInt()
+        return configureDataSource(host, port, name, user, password, driver, maxPoolSize)
+    }
 
-        hikariConfiguration.driverClassName = "org.postgresql.ds.PGSimpleDataSource"
+    private fun configureDataSource(
+        host: String,
+        port: Int,
+        name: String,
+        user: String,
+        password: String,
+        driver: String,
+        maxPoolSize: Int
+    ): HikariConfig {
+        val hikariConfiguration = HikariConfig()
+        hikariConfiguration.driverClassName = driver
         hikariConfiguration.jdbcUrl = "jdbc:postgresql://$host:$port/$name"
         hikariConfiguration.username = user
         hikariConfiguration.password = password
         hikariConfiguration.isAutoCommit = false
+        hikariConfiguration.maximumPoolSize = maxPoolSize
         hikariConfiguration.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
         hikariConfiguration.validate()
-        return HikariDataSource(hikariConfiguration)
+
+        return hikariConfiguration
     }
 
     private fun createTables() {
         prepareTables(*tables.toTypedArray())
     }
+
 }

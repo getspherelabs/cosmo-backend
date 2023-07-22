@@ -1,4 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 val ktor_version: String by project
 val kotlin_version: String by project
