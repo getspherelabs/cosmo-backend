@@ -95,6 +95,29 @@ class PlanetRouteTest : CosmoTest() {
         }
     }
 
+    @Test
+    fun `when user insert planets and search by name planets`() = withApp {
+        val planetName = Faker.Planet.Mars.name
+        val desc = Faker.Planet.Mars.description
+        val isPopular = Faker.Planet.Mars.isPopular
+        val size = Faker.Planet.Mars.size
+        val distanceFromSun = Faker.Planet.Mars.distanceFromSun
+
+        val request = PlanetRequest(
+            name = planetName,
+            description = desc,
+            isPopular = isPopular,
+            size = size,
+            distanceFromSun = distanceFromSun
+        ).toJson()
+
+        post("$v1/planet/new", request)
+
+        get("$v1/planets/$planetName").content.toDto<PlanetsResponse>().let { newResponse ->
+            assertEquals(newResponse.status, Status.Success)
+            assertEquals(newResponse.planets.first().name, planetName)
+        }
+    }
     companion object {
         private const val v1 = "/api/v1"
     }

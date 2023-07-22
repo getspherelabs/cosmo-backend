@@ -173,4 +173,27 @@ class PlanetDaoTest : CosmoTest() {
         assertEquals(1, planetCounts)
     }
 
+    @Test
+    fun `should insert planets and search by name`() = withApp {
+        planetDao.insert(
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Mars.description,
+            isPopular = Faker.Planet.Mars.isPopular,
+            size = Faker.Planet.Mars.size,
+            distanceFromSun = Faker.Planet.Mars.distanceFromSun
+        )
+
+        planetDao.insert(
+            name = Faker.Planet.Mars.name,
+            description = Faker.Planet.Saturn.description,
+            isPopular = Faker.Planet.Saturn.isPopular,
+            size = Faker.Planet.Saturn.size,
+            distanceFromSun = Faker.Planet.Saturn.distanceFromSun
+        )
+
+        val planets = planetDao.searchPlanets("ma")
+        println(planets)
+        assertEquals(2, planets.size)
+        assertEquals(Faker.Planet.Mars.name, planets.first().name)
+    }
 }
