@@ -7,10 +7,8 @@ import com.example.common.plugins.configureSerialization
 import com.example.common.plugins.configureSwagger
 import io.ktor.server.application.*
 import com.example.plugins.*
-import io.ktor.util.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
-
 
 fun Application.module() {
     configureKoin()
@@ -19,7 +17,7 @@ fun Application.module() {
     configureCors()
     configureSwagger()
     val config = environment.config
-    DatabaseFactory.initWithPostgres(config)
+    DatabaseFactory.withPostgres(config)
 }
 
 fun Application.testModule() {
@@ -27,5 +25,5 @@ fun Application.testModule() {
     configureSerialization()
     configureRouting()
     configureCors()
-    DatabaseFactory.init()
+    DatabaseFactory.withH2()
 }

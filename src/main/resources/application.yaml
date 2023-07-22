@@ -12,3 +12,5 @@ database:
   name: "$PGDATABASE:cosmo"
   username: "$PGUSER:postgres"
   password: "$PGPASSWORD:1234"
+  driver: org.postgresql.ds.PGSimpleDataSource
+  poolSize: 3
