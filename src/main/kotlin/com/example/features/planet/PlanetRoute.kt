@@ -17,6 +17,13 @@ fun Route.planetRoute() {
         call.respond(response.code, response.body)
     }
 
+    get(path = "/planets/{query}") {
+        val query = call.parameters["query"] ?: return@get
+        val newPlanets = controller.searchPlanets(query)
+        val newResponse = httpResponse(newPlanets)
+        call.respond(newResponse.code, newResponse.body)
+    }
+
     route("/planet/") {
         post(path = "new") {
             val request = call.receive<PlanetRequest>()

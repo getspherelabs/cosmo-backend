@@ -21,6 +21,10 @@ interface PlanetController {
     suspend fun getPlanetById(
         planetId: String
     ): PlanetResponse
+
+    suspend fun searchPlanets(
+        query: String
+    ): PlanetsResponse
 }
 
 class DefaultPlanetController(
@@ -141,6 +145,24 @@ class DefaultPlanetController(
         }
     }
 
+    override suspend fun searchPlanets(query: String): PlanetsResponse {
+        val planets = repository.searchPlanets(query)
+
+        return PlanetsResponse.onSuccess(planets.map { newPlanet ->
+            PlanetDto(
+                newPlanet.id,
+                newPlanet.name,
+                newPlanet.description,
+                newPlanet.size,
+                newPlanet.distanceFromSun,
+                newPlanet.isPopular,
+                newPlanet.createdTimestamp,
+                newPlanet.updatedTimestamp,
+                newPlanet.image
+            )
+        })
+    }
+
     private suspend fun hasExist(id: String) {
         if (!repository.exists(id)) {
             throw NotFoundException(message = "Not exist planet")
@@ -162,4 +184,6 @@ class DefaultPlanetController(
         }
         throw BadRequestException(message)
     }
+
+
 }

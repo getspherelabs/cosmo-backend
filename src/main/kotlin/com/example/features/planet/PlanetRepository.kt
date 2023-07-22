@@ -33,9 +33,11 @@ interface PlanetRepository {
     ): String
 
     suspend fun getPopularPlanets(): List<Planet>
+
+    suspend fun searchPlanets(query: String): List<Planet>
 }
 
-class DefaultPlanetRepository (
+class DefaultPlanetRepository(
     private val dao: PlanetDao
 ) : PlanetRepository {
     override suspend fun insert(
@@ -45,7 +47,7 @@ class DefaultPlanetRepository (
         distanceFromSun: String,
         isPopular: Boolean
     ): String {
-       return dao.insert(name, description, size, distanceFromSun, isPopular)
+        return dao.insert(name, description, size, distanceFromSun, isPopular)
     }
 
     override suspend fun getPlanetCounts(): Long {
@@ -80,10 +82,14 @@ class DefaultPlanetRepository (
         distanceFromSun: String,
         isPopular: Boolean
     ): String {
-       return dao.update(id, name, description, size, distanceFromSun, isPopular)
+        return dao.update(id, name, description, size, distanceFromSun, isPopular)
     }
 
     override suspend fun getPopularPlanets(): List<Planet> {
         return dao.getPopularPlanets()
+    }
+
+    override suspend fun searchPlanets(query: String): List<Planet> {
+        return dao.searchPlanets(query)
     }
 }

@@ -5,6 +5,7 @@ import com.example.data.entity.PlanetEntity
 import com.example.features.planet.Planet
 import com.example.features.planet.asPlanet
 import com.example.data.table.PlanetTable
+import org.jetbrains.exposed.sql.*
 import java.util.*
 
 interface PlanetDao {
@@ -38,6 +39,8 @@ interface PlanetDao {
     ): String
 
     suspend fun getPopularPlanets(): List<Planet>
+
+    suspend fun searchPlanets(query: String): List<Planet>
 }
 
 class DefaultPlanetDao : PlanetDao {
@@ -106,5 +109,14 @@ class DefaultPlanetDao : PlanetDao {
 
     override suspend fun getPopularPlanets(): List<Planet> = dbQuery {
         PlanetEntity.find { PlanetTable.isPopular eq true }.toList().map { it.asPlanet() }
+    }
+
+    override suspend fun searchPlanets(query: String): List<Planet> = dbQuery {
+        val newQuery = PlanetTable.selectAll().andWhere {
+            (PlanetTable.name.lowerCase().trim() like "%$query%") or (PlanetTable.name.upperCase()
+                .trim() like "%$query%") or (PlanetTable.description.lowerCase()
+                .trim() like "%$query%") or (PlanetTable.name like "%$query%")
+        }
+        PlanetEntity.wrapRows(newQuery).toList().map { it.asPlanet() }
     }
 }
