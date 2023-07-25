@@ -68,7 +68,12 @@ data class ArticleIdResponse(
 data class ArticleResponse(
     override val status: Status,
     override val message: String,
-    val article: ArticleDto? = null
+    val id: String = "",
+    val title: String = "",
+    val description: String = "",
+    val author: String = "",
+    val createdTimestamp: Long = 0L,
+    val updatedTimestamp: Long = 0L
 ) : Response {
     companion object {
         fun onFailure(message: String): ArticleResponse {
@@ -88,7 +93,12 @@ data class ArticleResponse(
         fun onSuccess(article: ArticleDto) = ArticleResponse(
             Status.Success,
             "Task was successful",
-            article
+            id = article.id,
+            author = article.author,
+            description = article.description,
+            title = article.title,
+            createdTimestamp = article.createdTimestamp,
+            updatedTimestamp = article.updatedTimestamp
         )
     }
 }

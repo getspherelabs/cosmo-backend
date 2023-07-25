@@ -72,7 +72,15 @@ data class StarIdResponse(
 data class StarResponse(
     override val status: Status,
     override val message: String,
-    val planet: StarDto? = null
+    val id: String = "",
+    val name: String = "",
+    val description: String = "",
+    val size: String = "",
+    val distanceFromSun: String = "",
+    val isPopular: Boolean = false,
+    val createdTimestamp: Long = 0L,
+    val updatedTimestamp: Long = 0L,
+    val image: String = ""
 ) : Response {
     companion object {
         fun onFailure(message: String): StarResponse {
@@ -92,7 +100,13 @@ data class StarResponse(
         fun onSuccess(star: StarDto) = StarResponse(
             Status.Success,
             "Task was successful",
-            star
+            id = star.id,
+            name = star.name,
+            description = star.description,
+            size = star.size,
+            distanceFromSun = star.distanceFromSun,
+            createdTimestamp = star.createdTimestamp,
+            updatedTimestamp = star.updatedTimestamp
         )
     }
 }
