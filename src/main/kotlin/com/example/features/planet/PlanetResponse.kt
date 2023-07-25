@@ -18,7 +18,6 @@ data class PlanetDto(
 )
 
 
-
 @Serializable
 data class PlanetsResponse(
     override val status: Status,
@@ -73,7 +72,15 @@ data class PlanetIdResponse(
 data class PlanetResponse(
     override val status: Status,
     override val message: String,
-    val planet: PlanetDto? = null
+    val id: String = "",
+    val name: String = "",
+    val description: String = "",
+    val size: String = "",
+    val distanceFromSun: String = "",
+    val isPopular: Boolean = false,
+    val createdTimestamp: Long = 0L,
+    val updatedTimestamp: Long = 0L,
+    val image: String = ""
 ) : Response {
     companion object {
         fun onFailure(message: String): PlanetResponse {
@@ -93,7 +100,13 @@ data class PlanetResponse(
         fun onSuccess(planet: PlanetDto) = PlanetResponse(
             Status.Success,
             "Task was successful",
-            planet
+            id = planet.id,
+            name = planet.name,
+            description = planet.description,
+            size = planet.size,
+            distanceFromSun = planet.distanceFromSun,
+            createdTimestamp = planet.createdTimestamp,
+            updatedTimestamp = planet.updatedTimestamp
         )
     }
 }

@@ -139,7 +139,8 @@ class DefaultPlanetController(
             hasExist(planetId)
 
             val result = repository.getPlanetById(planetId)
-            PlanetResponse.onSuccess(result.asDto())
+            PlanetResponse.onSuccess(
+                result.asDto())
         } catch (notFoundException: NotFoundException) {
             PlanetResponse.onNotFound(notFoundException.message)
         }
